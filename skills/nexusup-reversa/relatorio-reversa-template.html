@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>NexusUp — Relatório de Engenharia Reversa</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
+  :root{--azul:#1F5BFF;--grafite:#1A1B1F;--papel:#FAFAFC;--nevoa:#F2F2F5;--titanio:#8C8A85;--azulclaro:#5B8CFF;--line:#e7e8ee;--escuro:#121317;
+        --critica:#b4232b;--alta:#e4572e;--media:#e6a700;--baixa:#1F5BFF;--info:#8C8A85;}
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:"Geist",-apple-system,Arial,sans-serif;color:var(--grafite);font-size:12px;line-height:1.56;-webkit-font-smoothing:antialiased}
+  @page{size:A4;margin:16mm 15mm} @page capa{margin:0}
+  .break{page-break-before:always}
+  h2{font-size:15px;font-weight:600;letter-spacing:-.02em;margin:20px 0 8px;border-bottom:2px solid var(--line);padding-bottom:5px}
+  h3{font-size:13px;font-weight:600;margin:0 0 4px}
+  p{margin:0 0 8px} b{font-weight:600} .mut{color:var(--titanio)}
+  code,.mono{font-family:"Geist Mono",monospace} code{background:var(--nevoa);padding:1px 5px;border-radius:4px;font-size:10.5px}
+  pre{font-family:"Geist Mono",monospace;background:var(--nevoa);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:10.5px;white-space:pre-wrap}
+  /* capa full-bleed (uma cor, até as bordas) */
+  .cover{page:capa;width:210mm;height:297mm;margin:0;padding:24mm 20mm;overflow:hidden;background:var(--escuro);color:#EDEEF2;display:flex;flex-direction:column;page-break-after:always}
+  .cover h1{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1.06;margin:auto 0 0}
+  .cover .meta{margin-top:16px;font-size:13px;color:#C9CCD3} .cover .meta div{margin:2px 0}
+  .cover .foot{margin-top:22px;padding-top:14px;border-top:1px solid #2a2c33;display:flex;justify-content:space-between;font-size:11px;color:#8A8E98}
+  .tbl{width:100%;border-collapse:collapse;margin:4px 0 12px}
+  .tbl th,.tbl td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl th{background:var(--nevoa);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--titanio);font-weight:600}
+  .badge{display:inline-block;color:#fff;font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:999px}
+  .b-critica{background:var(--critica)} .b-alta{background:var(--alta)} .b-media{background:var(--media);color:#1A1B1F} .b-baixa{background:var(--baixa)} .b-info{background:var(--info)}
+  .card{border:1px solid var(--line);border-left:3px solid var(--azul);border-radius:10px;padding:12px 15px;margin:10px 0;page-break-inside:avoid}
+  .card .lbl{font-size:10px;color:var(--titanio);text-transform:uppercase;letter-spacing:.4px;margin-top:8px}
+  .box{background:var(--nevoa);border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:10px 0}
+  ul{margin:4px 0 10px;padding-left:18px} li{margin:3px 0}
+  .sign{margin-top:26px;display:flex;justify-content:space-between;align-items:flex-end}
+  .sigline{border-top:1.5px solid var(--grafite);width:240px;padding-top:6px;font-size:11px}
+</style></head><body>
+
+<!-- CAPA (uma cor, full-bleed) -->
+<section class="cover">
+  <svg viewBox="0 0 82 94" width="120" height="138" style="margin-top:2mm" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-19 -9)">
+    <path d="M28 94V34L68 80" fill="none" stroke="#8C8A85" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M92 94V18" fill="none" stroke="#1F5BFF" stroke-width="18" stroke-linecap="round"/></g></svg>
+  <h1>Relatório de<br>Engenharia Reversa.</h1>
+  <div class="meta">
+    <div><b>Cliente:</b> {{CLIENTE}}</div>
+    <div><b>Artefato:</b> {{ex.: app Android app-cliente.apk v2.3}}</div>
+    <div><b>Objetivo:</b> entender como funciona · mapear riscos · plano de melhoria</div>
+    <div><b>Classificação:</b> Confidencial</div>
+  </div>
+  <div class="foot"><span>NexusUp Company · engenharia reversa autorizada</span><span>{{DATA}}</span></div>
+</section>
+
+<!-- RESUMO -->
+<section>
+  <h2>Resumo executivo</h2>
+  <p>{{1–2 parágrafos de gestor: o que foi analisado, como o sistema funciona em alto nível, e o
+  risco/benefício geral. Sem jargão.}}</p>
+  <h2>Escopo e método</h2>
+  <p><b>Autorizado por:</b> {{responsável}}, em {{data}}. <b>Artefato:</b> <span class="mono">{{arquivo + hash}}</span>.</p>
+  <p class="mut">Método: abrir no REA (Ghidra/jadx/Frida) → mapear componentes → entender cada
+  mecânica → levantar riscos → plano de melhoria. Nada do código recuperado é redistribuído.</p>
+</section>
+
+<!-- MAPA DO SISTEMA -->
+<section class="break">
+  <h2>Mapa do sistema — as peças e como se conectam</h2>
+  <p>{{Visão geral da arquitetura: módulos/componentes, pontos de entrada, dependências e o
+  caminho dos dados. Pode colar um diagrama simples abaixo.}}</p>
+  <pre>{{
+  [App]
+    ├─ Autenticação  →  API /login  (token JWT)
+    ├─ Armazenamento →  SQLite local (dados do usuário)
+    ├─ Rede          →  api.cliente.com (TLS, pinning?)
+    └─ Licença       →  verificação local (chave embutida?)
+  }}</pre>
+  <table class="tbl">
+    <tr><th>Componente</th><th>O que é</th><th>Como se conecta</th></tr>
+    <tr><td>{{...}}</td><td>{{...}}</td><td>{{...}}</td></tr>
+  </table>
+</section>
+
+<!-- MECÂNICAS -->
+<section class="break">
+  <h2>Mecânicas — como cada parte funciona</h2>
+  <!-- ▼ DUPLIQUE ESTE CARTÃO POR MECÂNICA (autenticação, cripto, armazenamento, rede, licença...) -->
+  <div class="card">
+    <h3>{{Autenticação}}</h3>
+    <p>{{Como funciona por dentro: fluxo, onde está no código, que algoritmo/segredo usa.}}</p>
+    <div class="lbl">Onde no código</div>
+    <p class="mono">{{classe/função · ex.: com.app.auth.TokenManager.sign()}}</p>
+    <div class="lbl">Observação</div>
+    <p>{{pontos fortes e fracos dessa mecânica}}</p>
+  </div>
+  <!-- ▲ FIM DO CARTÃO -->
+</section>
+
+<!-- RISCOS -->
+<section class="break">
+  <h2>Riscos encontrados</h2>
+  <!-- ▼ DUPLIQUE POR RISCO -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h3>{{Chave de API embutida no app}}</h3>
+      <span class="badge b-alta">Alta</span><!-- b-critica/b-alta/b-media/b-baixa/b-info -->
+    </div>
+    <div class="mut mono">{{CVSS 3.1, se aplicável}}</div>
+    <div class="lbl">Onde</div><p class="mono">{{arquivo/função/string}}</p>
+    <div class="lbl">Por que importa</div><p>{{impacto de negócio}}</p>
+    <div class="lbl">Prova (dados mascarados)</div><pre>{{string/trecho que comprova, mascarado}}</pre>
+    <div class="lbl">Como corrigir</div><p>{{recomendação}}</p>
+  </div>
+  <!-- ▲ -->
+</section>
+
+<!-- PLANO DE MELHORIA -->
+<section class="break">
+  <h2>Plano de melhoria</h2>
+  <table class="tbl">
+    <tr><th>Prioridade</th><th>Mudança</th><th>Antes → Depois</th></tr>
+    <tr><td><span class="badge b-critica">1</span></td><td>{{mover a chave para o servidor}}</td><td>{{chave no app → token por sessão}}</td></tr>
+    <tr><td><span class="badge b-alta">2</span></td><td>{{ativar certificate pinning}}</td><td>{{sem pinning → pinning}}</td></tr>
+    <tr><td><span class="badge b-media">3</span></td><td>{{...}}</td><td>{{...}}</td></tr>
+  </table>
+  <div class="box">Após as correções, a NexusUp refaz a reversa e entrega o <b>relatório de
+  melhoria</b> (antes → depois), comprovando que os pontos foram resolvidos.</div>
+
+  <div class="sign">
+    <div class="sigline">NexusUp Company<br><span class="mut">Engenharia reversa · {{DATA}}</span></div>
+    <div style="text-align:center">
+      <svg viewBox="0 0 82 94" width="32" height="37" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-19 -9)">
+        <path d="M28 94V34L68 80" fill="none" stroke="#1A1B1F" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M92 94V18" fill="none" stroke="#1F5BFF" stroke-width="18" stroke-linecap="round"/></g></svg>
+      <div class="mut" style="font-size:10px;margin-top:5px">NexusUp</div>
+    </div>
+  </div>
+</section>
+
+</body></html>

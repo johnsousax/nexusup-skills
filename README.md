@@ -37,6 +37,13 @@ Opera a plataforma de pentest **autônomo multiagente** (planejador + executores
 tráfego + duplo grafo). Para corridas longas e automatizadas, com evidência amarrada a cada
 achado e um lado defensivo (assinaturas de detecção Sigma/Suricata).
 
+### 🔬 `nexusup-reversa` — entender como o sistema funciona
+Engenharia reversa no padrão NexusUp, com o **REA** (Ghidra, jadx, Frida). Em vez de só achar
+falhas, **entende como um sistema funciona por dentro** (binário, APK/iOS, bundle web, firmware):
+mapeia as mecânicas, acha segredos embutidos e riscos de design. Dois caminhos: **relatório para
+o cliente** (como funciona + o que melhorar) ou **trabalhar no próprio app** e entregar o
+**relatório de melhoria** (antes → depois).
+
 ### 🎨 `nexusup-identidade` — o sistema de design
 A identidade visual NexusUp aplicada a qualquer entregável: cores oficiais (Azul Nexus
 `#1F5BFF`, Grafite `#1A1B1F`), fonte **Geist**, logos e o símbolo. Faz o relatório sair com a

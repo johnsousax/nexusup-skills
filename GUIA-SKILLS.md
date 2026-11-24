@@ -127,11 +127,13 @@ para melhorar a segurança — uso **sempre autorizado**.
 - **reverse-engineer-anything** — Engenharia reversa de qualquer coisa (binário, app, bundle):
   vê como cada mecânica se encaixa no sistema. Usa Ghidra, jadx e Frida (ferramenta REA).
 - **mid-engagement-ir-detection** — Detecção e resposta a incidente no meio de um engajamento.
+- **nexusup-reversa** — O jeito NexusUp de usar o REA: mapear as mecânicas de um app e entregar relatório de entendimento + melhoria.
 
 ## ⭐ Skills NexusUp (suas)
 
 - **nexusup-pentest** — O kit de campo: conduz o pentest de ponta a ponta **sem instalar nada**.
 - **nexusup-seguranca** — Opera a plataforma autônoma (ARTEX) para corridas longas.
+- **nexusup-reversa** — Engenharia reversa no padrão NexusUp: entender como um sistema funciona por dentro (REA) e gerar relatório para o cliente ou para melhorar o app.
 - **nexusup-identidade** — O sistema de design NexusUp (cores, fonte Geist, logos) para os entregáveis.
 
 ---
