@@ -57,6 +57,10 @@ RAG, agentes), **mobile** (Android/iOS), **identidade e AD** (OAuth, SAML, Okta,
 **detecta** o ataque no futuro.
 
 Detalhes nos documentos:
+- **[Sistema Completo de Cibersegurança](documentos/NexusUp-Sistema-Completo.pdf)** — o que cada
+  sistema faz e como se conectam (uma frente só).
+- **[NexusUp Reversa (REA) — Sistema](documentos/NexusUp-Reversa-Sistema.pdf)** — tudo que a
+  engenharia reversa faz.
 - **[Avaliação de Cobertura de Segurança](documentos/NexusUp-Avaliacao-de-Seguranca.pdf)** —
   o que avaliamos, com que profundidade, e as skills por trás.
 - **[Proposta Comercial (modelo)](documentos/NexusUp-Proposta-Comercial.pdf)** — escopo,
