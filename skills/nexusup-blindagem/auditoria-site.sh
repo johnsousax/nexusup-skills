@@ -21,7 +21,7 @@ EXP=$(echo | openssl s_client -servername "$D" -connect "$D:443" 2>/dev/null | o
 [ -n "$EXP" ] && inf "Certificado vence em: $EXP"
 
 sec "Cabeçalhos de segurança"
-H=$(curl -sI -A "$UA" "$U" --max-time 15 | tr -d '\r')
+H=$(curl -sIL -A "$UA" "$U" --max-time 15 | tr -d '\r' | awk 'BEGIN{RS="";ORS="\n\n"}{b=$0}END{print b}')
 chk(){ echo "$H" | grep -qi "^$1:" && ok "$1: $(echo "$H" | grep -i "^$1:" | head -1 | cut -d: -f2- | cut -c1-80)" || al "Falta $1"; }
 chk Strict-Transport-Security; chk Content-Security-Policy; chk X-Content-Type-Options
 chk Referrer-Policy; chk Permissions-Policy
@@ -38,6 +38,8 @@ echo "$H" | grep -i '^set-cookie:' | while read -r c; do
 done
 
 sec "Arquivos que não deveriam estar públicos"
+HOME_SZ=$(curl -sL -A "$UA" "$U/" --max-time 15 | wc -c | tr -d ' ')
+SPA_SZ=$(curl -sL -A "$UA" "$U/nexusup-rota-inexistente-$$" --max-time 15 | wc -c | tr -d ' ')
 for p in .env .env.local .env.production .git/HEAD .git/config .svn/entries .DS_Store backup.zip backup.sql db.sql dump.sql \
          wp-config.php.bak config.php.bak phpinfo.php server-status actuator actuator/env actuator/heapdump \
          .vscode/sftp.json docker-compose.yml package.json composer.json web.config trace.axd elmah.axd \
@@ -47,7 +49,8 @@ for p in .env .env.local .env.production .git/HEAD .git/config .svn/entries .DS_
   if [ "$p" = ".well-known/security.txt" ]; then
     [ "$r" = "200" ] && ok "security.txt publicado" || inf "Sem /.well-known/security.txt (recomendado)"; continue; fi
   if [ "$r" = "200" ] && [ "$sz" -gt 0 ]; then
-    if grep -qiE '<!doctype html|<html' /tmp/nexus_bl_$$ && ! echo "$p" | grep -qE 'swagger|graphql'; then
+    if [ "$sz" -eq "$HOME_SZ" ] || [ "$sz" -eq "$SPA_SZ" ]; then :   # fallback de SPA: não é o arquivo
+    elif grep -qiE '<!doctype html|<html' /tmp/nexus_bl_$$ && ! echo "$p" | grep -qE 'swagger|graphql'; then
       inf "/$p → 200 mas é página HTML (provável rota SPA, confira)"
     else al "/$p exposto (HTTP 200, ${sz} bytes)"; fi
   fi
@@ -65,7 +68,9 @@ echo "$A" | grep -qi 'evil.example' && al "CORS reflete origem arbitrária: $A" 
 
 sec "DNS e e-mail"
 if command -v dig >/dev/null; then
-  B=${D#www.}
+  case "$D" in *.com.br|*.net.br|*.org.br|*.co.uk) B=$(echo "$D" | awk -F. '{print $(NF-2)"."$(NF-1)"."$NF}');;
+    *) B=$(echo "$D" | awk -F. '{print $(NF-1)"."$NF}');; esac
+  [ "$B" != "$D" ] && inf "E-mail/DNS checados no domínio raiz: $B"
   dig +short TXT "$B" | grep -q 'v=spf1' && ok "SPF: $(dig +short TXT "$B" | grep spf1 | head -1)" || al "Sem SPF"
   dig +short TXT "_dmarc.$B" | grep -q 'v=DMARC1' && { dig +short TXT "_dmarc.$B" | grep -q 'p=reject\|p=quarantine' && ok "DMARC com política" || al "DMARC p=none (use quarantine/reject)"; } || al "Sem DMARC"
   dig +short CAA "$B" | grep -q issue && ok "Registro CAA presente" || inf "Sem registro CAA (recomendado)"

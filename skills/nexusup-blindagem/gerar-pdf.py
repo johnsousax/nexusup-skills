@@ -150,7 +150,7 @@ def main():
     capa = f"""<section class="capa">
 <div class="marca">{SIMBOLO('#FFFFFF')}<span>NexusUp&nbsp;Segurança</span></div>
 <svg class="camadas" viewBox="0 0 360 210">{CAMADAS_SVG}</svg>
-<div class="tag">Guia de defesa · {html.escape(meta.get('classificacao',''))}</div>
+<div class="tag">{html.escape(meta.get('tag','Guia de defesa'))} · {html.escape(meta.get('classificacao',''))}</div>
 <h1>{titulo_html}</h1>
 <div class="sub">{html.escape(meta.get('subtitulo',''))}</div>
 <div class="rodape"><span>NexusUp Company</span><span>v{html.escape(meta.get('versao','1.0'))} · {html.escape(meta.get('data',''))}</span></div>
