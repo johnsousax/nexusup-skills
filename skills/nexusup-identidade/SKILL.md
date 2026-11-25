@@ -1,9 +1,9 @@
 ---
 name: nexusup-identidade
-description: Sistema de design e identidade visual da NexusUp (v1.1) — cores oficiais (Azul Nexus #1F5BFF, Grafite #1A1B1F, Papel, Névoa, Titânio, Azul Claro), tipografia Geist/Geist Mono, e todos os logotipos (company/horizontal/símbolo/vertical/wordmark em cor/negativo/preto/branco), favicons e app icons. Use SEMPRE que for criar qualquer coisa com a marca NexusUp — PDF, relatório, página web, artifact, app, ícone, post de rede social, e-mail, capa, documento. Os arquivos ficam em ~/nexusup-identidade. Aplique estes tokens e fontes exatos em vez de aproximar.
+description: Sistema de design e identidade visual da NexusUp (v1.2, com padrão de apresentação comercial aprovado) — cores oficiais (Azul Nexus #1F5BFF, Grafite #1A1B1F, Papel, Névoa, Titânio, Azul Claro), tipografia Geist/Geist Mono, e todos os logotipos (company/horizontal/símbolo/vertical/wordmark em cor/negativo/preto/branco), favicons e app icons. Use SEMPRE que for criar qualquer coisa com a marca NexusUp — PDF, relatório, página web, artifact, app, ícone, post de rede social, e-mail, capa, documento. Os arquivos ficam em ~/nexusup-identidade. Aplique estes tokens e fontes exatos em vez de aproximar.
 ---
 
-# NexusUp — Identidade Visual (v1.1)
+# NexusUp — Identidade Visual (v1.2)
 
 Pacote completo em **`~/nexusup-identidade/`**: logos (SVG+PNG), favicons, app icons, fontes
 Geist, redes sociais e o manual em PDF. Sempre que um trabalho for "da NexusUp", use isto.
@@ -102,7 +102,50 @@ a{color:var(--azul-nexus);} .mono{font-family:"Geist Mono",monospace;}
 **PDF** (como no doc do sistema): montar HTML com estes tokens + Geist, depois
 `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf=saida.pdf file://<html>`.
 
-## 6. Nunca
+## 6. Padrão de apresentação comercial NexusUp (aprovado por Jon — v1.2)
+
+Toda proposta de sistema/serviço para cliente sai **neste padrão**. Referência aprovada:
+apresentação "Sistema de Gestão A&D Eventos" (20 slides).
+
+**Entrega**
+- Slides 16:9 (1920×1080) no design NexusUp **+ 1 único PDF** da apresentação. Nunca dois PDFs.
+- Se pedirem landing page para o cliente: repositório próprio no GitHub + Vercel, com o
+  WhatsApp informado e o crédito NexusUp no rodapé.
+
+**Visual**
+- Tokens e Geist desta skill. Tudo **arredondado** (cards, chips, botões, molduras de foto) —
+  nada de canto reto. Capa e aberturas **variadas** (bolinhas, pílulas, círculos, formas
+  orgânicas), não repetir o mesmo desenho de capa.
+- Fonte mínima 24 px no slide; conteúdo termina acima do rodapé (≤ 920 px); rodapé fixo
+  com "NexusUp Company · nome do projeto · nº".
+
+**Estrutura (ordem que funcionou)**
+1. Capa com nome e dados reais do cliente (razão social, CNPJ, endereço) e foto real dele.
+2. "O que entendemos" — o pedido do cliente nas palavras dele.
+3. O espaço/negócio do cliente com as fotos dele.
+4. Camadas do sistema (painel = sistema; não separar "gestão" e "sistema").
+5. **Mapa mental do sistema**: principal em cima, ramos embaixo, um embaixo do outro,
+   **linha descendo pelo meio** dos itens. O **agente de IA em destaque** (azul com brilho +
+   etiqueta preta "Diferencial") — é o diferencial NexusUp.
+6. Dashboard central detalhado (8 KPIs, gráfico de 6 meses, faturamento por setor, alertas).
+7. Sistema no celular ("toda a gestão na palma da mão").
+8. Slides por setor do cliente (ex.: hotel, escolas, eventos).
+9. Financeiro: tabela com **todas as fontes de receita** + botões "Baixar relatório completo"
+   e "Baixar por setor".
+10. Pessoas, cargos e acessos (cada um só vê o seu setor).
+11. Agente de IA (WhatsApp + dentro do sistema, conectado aos dados, só fala da empresa) —
+    1 agente só, com exemplo de conversa.
+12. Segurança e LGPD (concretas: criptografia, 2FA, permissões, backup, histórico).
+13. Resumo do sistema.
+14. **Plano para alavancar**: mapa mental de marketing no mesmo desenho do mapa do sistema
+    (Marketing completo → Tráfego pago Meta, Social media, Landing page **grátis** em destaque)
+    + 1 página de tráfego pago + 1 página de social media. Curto, só a ideia.
+15. Encerramento com contato e "Desenvolvido por NexusUp Company · NexusUp.company".
+
+**Nunca na apresentação**: página de fontes/citações, Google Ads (só Meta), textos longos,
+formas com ponta, dois agentes de IA.
+
+## 7. Nunca
 
 - Não esticar, girar, recolorir (fora das variantes) nem trocar a fonte do logo.
 - Não pôr o logo `-cor` sobre fundo escuro nem o `-negativo` sobre claro (contraste some).

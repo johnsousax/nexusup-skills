@@ -134,7 +134,7 @@ para melhorar a segurança — uso **sempre autorizado**.
 - **nexusup-pentest** — O kit de campo: conduz o pentest de ponta a ponta **sem instalar nada**.
 - **nexusup-seguranca** — Opera a plataforma autônoma (ARTEX) para corridas longas.
 - **nexusup-reversa** — Engenharia reversa no padrão NexusUp: entender como um sistema funciona por dentro (REA) e gerar relatório para o cliente ou para melhorar o app.
-- **nexusup-identidade** — O sistema de design NexusUp (cores, fonte Geist, logos) para os entregáveis.
+- **nexusup-identidade** — O sistema de design NexusUp (cores, fonte Geist, logos) e o padrão aprovado de apresentação comercial (slides + 1 PDF, mapas mentais, agente de IA como diferencial).
 
 ---
 
