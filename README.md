@@ -65,6 +65,9 @@ RAG, agentes), **mobile** (Android/iOS), **identidade e AD** (OAuth, SAML, Okta,
 Detalhes nos documentos:
 - **[Blindagem NexusUp](documentos/NexusUp-Blindagem.pdf)** ([versão MD](documentos/NexusUp-Blindagem.md)) —
   como proteger VPS, sites e sistemas contra invasão e fraude, explicado pelos próprios invasores.
+- **[Teste Controlado](documentos/NexusUp-Teste-Controlado.pdf)** ([versão MD](documentos/NexusUp-Teste-Controlado.md)) —
+  como testar a segurança de um sistema que já está no ar, com clientes usando, sem causar problema
+  (cópia de teste, escopo travado, ARTEX só na homologação).
 - **[Sistema Completo de Cibersegurança](documentos/NexusUp-Sistema-Completo.pdf)** — o que cada
   sistema faz e como se conectam (uma frente só).
 - **[NexusUp Reversa (REA) — Sistema](documentos/NexusUp-Reversa-Sistema.pdf)** — tudo que a
