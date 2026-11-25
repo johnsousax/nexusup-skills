@@ -19,6 +19,8 @@ código/fornecedores → IA/mobile → vigilância.
   (nuclei/ZAP/sqlmap) em produção sem o usuário pedir explicitamente.
 - Nunca imprima segredos encontrados por inteiro (mostre os 6–12 primeiros caracteres).
 - SSH: ao endurecer, **sempre** mandar testar em segundo terminal antes de fechar o primeiro.
+- Relatório com falhas reais de sistemas = **confidencial**: nunca no repositório público
+  (`nexusup-skills`); guardar em `~/Documents/NexusUp-Seguranca` ou repo privado.
 - Máquina do usuário é fraca (MacBook Air 2015): prefira rodar ferramentas pesadas **na VPS**.
 
 ## Fluxo
@@ -51,7 +53,13 @@ código/fornecedores → IA/mobile → vigilância.
 
    Se houver Supabase: `get_advisors` (security) + checar RLS em todas as tabelas.
    Se houver Vercel: env vars marcadas Sensitive, cabeçalhos em `vercel.json`/`next.config`.
-5. **Teste das duas contas** (com autorização): conta A tenta ler/editar/apagar recursos da conta B.
+5. **Isolamento e fraude de lógica** — leia `metodo-avancado.md` (método codeaudit/api-security do
+   nexusup-seguranca). No Supabase, rode `teste-isolamento.sql` (transação desfeita: logado sem empresa
+   e anônimo devem ver 0), leia políticas UPDATE/INSERT e gatilhos de proteção, e audite cada edge
+   function com service_role (login + permissão por ação + fraude interna). Fora do Supabase:
+   **duas contas** (A tenta ler/editar/apagar recursos de B).
+   Todo achado passa pelos **portões de qualidade** (alcançável, sem trava no meio, prova, impacto,
+   contra-argumento) — trava interna encontrada = "mitigado", não crítico.
 6. **Plano de correção** — priorize: exposto publicamente > autorização/IDOR > auth > fraude >
    cabeçalhos/higiene. Para cada item: risco em 1 frase, prova, correção com código/config pronto,
    como confirmar.
