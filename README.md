@@ -23,7 +23,7 @@ cole o prompt pronto. Em minutos você conduz uma análise autorizada do início
 
 ## As skills NexusUp
 
-Três skills próprias, abertas aqui para você usar:
+As skills próprias, abertas aqui para você usar:
 
 ### 🛡️ `nexusup-pentest` — o kit de campo
 Conduz uma análise de segurança **de ponta a ponta sem instalar nada**: autorização → recon →
@@ -44,6 +44,12 @@ mapeia as mecânicas, acha segredos embutidos e riscos de design. Dois caminhos:
 o cliente** (como funciona + o que melhorar) ou **trabalhar no próprio app** e entregar o
 **relatório de melhoria** (antes → depois).
 
+### 🧱 `nexusup-blindagem` — o lado defensivo
+Usa todos os especialistas de invasão (`hunt-*`, OSINT, nuvem, mobile) **ao contrário**: para cada
+técnica do invasor, a defesa e o teste. Audita **somente leitura** a VPS (`auditoria-vps.sh`) e o
+site (`auditoria-site.sh`), revisa o código pela lente de cada ataque e entrega o plano de
+endurecimento + antifraude. Inclui `gerar-pdf.py` (Markdown → PDF no padrão NexusUp).
+
 ### 🎨 `nexusup-identidade` — o sistema de design
 A identidade visual NexusUp aplicada a qualquer entregável: cores oficiais (Azul Nexus
 `#1F5BFF`, Grafite `#1A1B1F`), fonte **Geist**, logos e o símbolo. Faz o relatório sair com a
@@ -57,6 +63,8 @@ RAG, agentes), **mobile** (Android/iOS), **identidade e AD** (OAuth, SAML, Okta,
 **detecta** o ataque no futuro.
 
 Detalhes nos documentos:
+- **[Blindagem NexusUp](documentos/NexusUp-Blindagem.pdf)** ([versão MD](documentos/NexusUp-Blindagem.md)) —
+  como proteger VPS, sites e sistemas contra invasão e fraude, explicado pelos próprios invasores.
 - **[Sistema Completo de Cibersegurança](documentos/NexusUp-Sistema-Completo.pdf)** — o que cada
   sistema faz e como se conectam (uma frente só).
 - **[NexusUp Reversa (REA) — Sistema](documentos/NexusUp-Reversa-Sistema.pdf)** — tudo que a
